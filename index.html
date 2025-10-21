@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Thomas H. — Persönliche Startseite</title>
+  <meta name="description" content="Minimalistische persönliche Startseite von Thomas H., mit Stationen, Bild und Links.">
+  <style>
+    :root{
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --muted:#47585a; /* darker muted for contrast */
+      --accent:#20b581ff; /* updated accent */
+      --text:#0b1220;
+      --radius:14px;
+      --max:900px;
+      --gap:1.15rem;
+      --line:1.6;
+    }
+    /* Reset-ish */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  color:var(--text);
+      background:linear-gradient(180deg,var(--bg),#fff);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:var(--line);
+      padding:2.25rem 1.1rem;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+    }
+    .wrap{width:100%;max-width:var(--max)}
+    header{
+      display:flex;gap:calc(var(--gap) + 0.2rem);align-items:center;margin-bottom:1.5rem;
+    }
+  .avatar{width:200px;height:200px;border-radius:16px;overflow:hidden;flex:0 0 200px;border:1px solid rgba(11,18,32,0.06);background:linear-gradient(135deg,#eef 0%,#fff 100%);box-shadow:0 12px 34px rgba(11,18,32,0.08)}
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    h1{font-size:1.5rem;margin:0;color:var(--text)}
+    p.lead{margin:0.35rem 0 0;color:var(--muted)}
+
+    main{background:transparent}
+    .grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+
+    /* Table styling */
+    .stations{
+      background:var(--card);padding:1.15rem;border-radius:var(--radius);box-shadow:0 8px 26px rgba(11,18,32,0.06);
+      overflow:auto;
+    }
+    table{width:100%;border-collapse:collapse;font-size:0.95rem}
+  thead th{ text-align:left;padding:0.6rem 0.6rem;color:var(--muted);font-weight:600;border-bottom:2px solid rgba(11,18,32,0.04)}
+  tbody td{padding:0.75rem 0.6rem;border-bottom:1px solid rgba(11,18,32,0.03)}
+  tbody tr{transition:background-color 160ms ease, transform 150ms ease}
+  tbody tr:hover{background-color:color-mix(in srgb, var(--accent) 6%, #ffffff);transform:translateY(-1px)}
+    tbody tr:last-child td{border-bottom:0}
+
+    /* Gallery */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1.05rem}
+  .card{background:var(--card);border-radius:12px;padding:0;overflow:hidden;border:1px solid rgba(11,18,32,0.04);display:flex;flex-direction:column;height:100%;text-decoration:none;color:inherit;box-shadow:0 8px 20px rgba(11,18,32,0.06);transition:transform 180ms ease, box-shadow 180ms ease}
+  .card:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(11,18,32,0.12)}
+  .card figure{margin:0;height:150px;overflow:hidden}
+  .card img{width:100%;height:100%;object-fit:cover;display:block}
+  .card .meta{padding:0.9rem 1rem}
+  .card h3{margin:0 0 0.45rem;font-size:1rem}
+  .card p{margin:0;color:var(--muted);font-size:0.95rem}
+
+    /* layout tweaks */
+    @media (max-width:900px){
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .avatar{width:140px;height:140px;flex:0 0 140px}
+    }
+    /* At or below 720px, gallery becomes single-column as requested */
+    @media (max-width:720px){
+      .gallery{grid-template-columns:1fr}
+      .avatar{width:120px;height:120px;flex:0 0 120px}
+    }
+    @media (max-width:560px){
+      header{align-items:flex-start}
+      .grid{gap:0.75rem}
+      .avatar{width:88px;height:88px;flex:0 0 88px}
+      h1{font-size:1.25rem}
+    }
+
+    /* focus for accessibility */
+    a:focus{outline:3px solid color-mix(in srgb, var(--accent) 30%, white);outline-offset:3px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="avatar" aria-hidden="true">
+        <img src="assets/me.jpg" alt="Porträt von Thomas B.">
+      </div>
+      <div>
+        <h1>Thomas B.</h1>
+        <p class="lead">Geoinformatik-Student, Entwickler und neugieriger Kartograph. Ich interessiere mich für räumliche Daten, Web-Mapping und offene Standards.</p>
+        <p class="lead" style="margin-top:0.35rem;font-size:0.92rem">Diese Seite ist bewusst minimal gehalten — schnelle Übersicht, Links zu Projekten und Stationen.</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="grid">
+        <section aria-labelledby="stations-title" class="stations">
+          <h2 id="stations-title" style="margin:0 0 0.5rem 0;font-size:1.05rem">Stationen</h2>
+          <p style="margin:0 0 0.5rem 0;color:var(--muted);font-size:0.92rem">Auswahl an Stationen und relevanten Stichworten.</p>
+          <table aria-describedby="stations-title">
+            <thead>
+              <tr>
+                <th scope="col">Jahr</th>
+                <th scope="col">Station</th>
+                <th scope="col">Ort</th>
+                <th scope="col">Stichwort</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2025</td>
+                <td>Masterpraktikum</td>
+                <td>Mainz</td>
+                <td>Web Mapping</td>
+              </tr>
+              <tr>
+                <td>2024</td>
+                <td>Forschungsprojekt</td>
+                <td>Koblenz</td>
+                <td>LiDAR-Auswertung</td>
+              </tr>
+              <tr>
+                <td>2023</td>
+                <td>Werkstudent</td>
+                <td>Frankfurt</td>
+                <td>Geodatenpipeline</td>
+              </tr>
+              <tr>
+                <td>2022</td>
+                <td>Praktikum</td>
+                <td>Wiesbaden</td>
+                <td>OSM-Import</td>
+              </tr>
+              <tr>
+                <td>2021</td>
+                <td>Auslandssemester</td>
+                <td>Utrecht</td>
+                <td>Spatial Analysis</td>
+              </tr>
+              <tr>
+                <td>2019</td>
+                <td>Studium begonnen</td>
+                <td>Mainz</td>
+                <td>Geoinformatik</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section aria-labelledby="gallery-title">
+          <h2 id="gallery-title" style="margin:0 0 0.5rem 0;font-size:1.05rem">Ausgewählte Links</h2>
+          <p style="margin:0 0 0.5rem 0;color:var(--muted);font-size:0.92rem">Kurzbeschreibungen und schnelle Zugänge zu Projekten und Profilen.</p>
+
+          <div class="gallery" role="list">
+            <a class="card" role="listitem" href="https://github.com/thomashsmainz" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profil von Thomas H. öffnen">
+              <figure>
+                <img src="https://picsum.photos/600/400?random=1" alt="Platzhalterbild für GitHub Projekte">
+              </figure>
+              <div class="meta">
+                <h3>GitHub</h3>
+                <p>Quellcode, kleine Tools und Mapping-Scripts.</p>
+              </div>
+            </a>
+
+            <a class="card" role="listitem" href="https://example.com/portfolio" target="_blank" rel="noopener noreferrer" aria-label="Portfolio öffnen">
+              <figure>
+                <img src="https://picsum.photos/600/400?random=2" alt="Platzhalterbild für Portfolio">
+              </figure>
+              <div class="meta">
+                <h3>Portfolio</h3>
+                <p>Ausgewählte Projekte, Karten und Visualisierungen.</p>
+              </div>
+            </a>
+
+            <a class="card" role="listitem" href="https://example.com/fotoblog" target="_blank" rel="noopener noreferrer" aria-label="Fotoblog öffnen">
+              <figure>
+                <img src="https://picsum.photos/600/400?random=3" alt="Platzhalterbild für Fotoblog">
+              </figure>
+              <div class="meta">
+                <h3>Fotoblog</h3>
+                <p>Foto-Highlights und kurze Geschichten zu Aufnahmen.</p>
+              </div>
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
