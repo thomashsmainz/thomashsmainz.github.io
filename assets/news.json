@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Neue Karte zur Baumbestandsanalyse",
+    "date": "2025-10-10",
+    "image": "https://picsum.photos/600/400?news=1",
+    "summary": "Veröffentlichung einer interaktiven Karte mit Ergebnissen zur Baumbestandserfassung und ersten Auswertungen." 
+  },
+  {
+    "title": "Workshop: LiDAR-Auswertung",
+    "date": "2025-09-22",
+    "image": "https://picsum.photos/600/400?news=2",
+    "summary": "Ein ganztägiger Workshop zu Methoden der LiDAR-Verarbeitung und -Analyse, inklusive Praxisbeispielen." 
+  },
+  {
+    "title": "Tool-Release: GeoJSON-Optimierer",
+    "date": "2025-08-03",
+    "image": "https://picsum.photos/600/400?news=3",
+    "summary": "Kleines Kommandozeilen-Tool zur Reduktion und Validierung von GeoJSON-Dateien, jetzt auf GitHub verfügbar." 
+  },
+  {
+    "title": "Projektabschluss: Web-Mapping-App",
+    "date": "2025-06-15",
+    "image": "https://picsum.photos/600/400?news=4",
+    "summary": "Abschlussbericht und Demo der Web-Mapping-Anwendung, inkl. Quellcode und Datenbeispielen." 
+  }
+]
