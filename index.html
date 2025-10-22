@@ -7,7 +7,7 @@
   <meta name="description" content="Minimalistische persönliche Startseite von Thomas H., mit Stationen, Bild und Links.">
   <style>
     :root{
-      --bg:#f7f8fb;
+      --bg:#ffffff; /* plain white background for light mode */
       --card:#ffffff;
       --muted:#47585a; /* darker muted for contrast */
       --accent:#20b581ff; /* updated accent */
@@ -24,7 +24,7 @@
       margin:0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color:var(--text);
-      background:linear-gradient(180deg,var(--bg),#fff);
+      background:var(--bg);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       line-height:var(--line);
@@ -67,6 +67,16 @@
   .card h3{margin:0 0 0.45rem;font-size:1rem}
   .card p{margin:0;color:var(--muted);font-size:0.95rem}
 
+    /* News list / cards */
+    .news-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+    .news-card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid rgba(11,18,32,0.04);box-shadow:0 8px 20px rgba(11,18,32,0.06);display:flex;gap:0;padding:0}
+    .news-card figure{flex:0 0 140px;height:100%;margin:0;overflow:hidden}
+    .news-card img{width:100%;height:100%;object-fit:cover;display:block}
+    .news-card .meta{padding:0.9rem 1rem;display:flex;flex-direction:column;justify-content:center}
+    .news-card h3{margin:0 0 0.35rem;font-size:1rem}
+    .news-card .date{font-size:0.85rem;color:var(--muted);margin-bottom:0.45rem}
+    .news-empty{padding:1rem;color:var(--muted)}
+
     /* layout tweaks */
     @media (max-width:900px){
       .gallery{grid-template-columns:repeat(2,1fr)}
@@ -87,10 +97,106 @@
     /* focus for accessibility */
     a:focus{outline:3px solid color-mix(in srgb, var(--accent) 30%, white);outline-offset:3px}
     a{color:var(--accent)}
+
+    /* Theme toggle styles (fixed button top-right) */
+    .theme-toggle{
+      position:fixed;
+      top:1rem;
+      right:1rem;
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--card);
+      border:1px solid rgba(11,18,32,0.06);
+      box-shadow:0 8px 20px rgba(11,18,32,0.06);
+      cursor:pointer;
+      z-index:9999;
+      padding:6px;
+    }
+    .theme-toggle svg{width:22px;height:22px;display:block}
+    .theme-toggle:focus{outline:3px solid color-mix(in srgb, var(--accent) 30%, white);outline-offset:3px}
+
+    /* Dark theme variable overrides */
+    html[data-theme="dark"]{
+      --bg:#121212; /* plain dark gray background for dark mode */
+      --card:#0f1720;
+      --muted:#9aa6b0;
+      --accent:#ffd86b;
+      --text:#eef2f6;
+    }
+
+    /* Slight adjustment for the fixed button in dark mode */
+    html[data-theme="dark"] .theme-toggle{
+      border-color: rgba(255, 255, 255, 0.314);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
+      color: #ffffffce; /* moon icon white in dark mode */
+    }
+
+    /* Floating contact buttons (GitHub + Email) */
+    .contact-actions{
+      position:fixed;
+      right:1rem;
+      bottom:1rem;
+      display:flex;
+      flex-direction:column;
+      gap:0.5rem;
+      z-index:9999;
+      align-items:flex-end;
+    }
+    .contact-actions a{
+      width:52px;
+      height:52px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:12px;
+      background:var(--card);
+      border:1px solid rgba(11,18,32,0.06);
+      box-shadow:0 8px 20px rgba(11,18,32,0.06);
+      color:var(--muted);
+      text-decoration:none;
+      transition:transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+      padding:6px;
+    }
+    .contact-actions a:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 18px 28px rgba(11,18,32,0.12)}
+    .contact-actions svg{width:24px;height:24px;display:block}
+    /* Colored icons */
+    .github-btn{ color:#0366d6; /* GitHub blue */ }
+    .email-btn{ color:#e53e3e; /* Email red */ }
+    /* Ensure colored icons remain visible & balanced in dark mode */
+    html[data-theme="dark"] .contact-actions a{border-color:rgba(255,255,255,0.08);box-shadow:0 8px 20px rgba(255,255,255,0.04);background:var(--card)}
+    html[data-theme="dark"] .github-btn{ color:#79aefc }
+    html[data-theme="dark"] .email-btn{ color:#ff9b9b }
+
+    /* Tabs: zentriert, ins Design integriert */
+    .tabs{display:flex;justify-content:center;gap:0.6rem;margin:0 0 1rem 0}
+    .tab{background:transparent;border:1px solid rgba(11,18,32,0.06);padding:0.45rem 0.9rem;border-radius:999px;cursor:pointer;color:var(--muted);font-weight:700}
+    .tab[aria-selected="true"]{background:var(--card);border-color:var(--accent);color:var(--text);box-shadow:0 8px 20px rgba(11,18,32,0.06)}
+    .tab:focus{outline:3px solid color-mix(in srgb, var(--accent) 30%, white);outline-offset:3px}
+
+    /* Tab panels */
+    .tab-panel{display:none}
+    .tab-panel[aria-hidden="false"]{display:block}
+
+    /* Dark-mode Anpassungen für Tabs */
+    html[data-theme="dark"] .tab{border-color:rgba(255,255,255,0.06);color:var(--muted)}
+    html[data-theme="dark"] .tab[aria-selected="true"]{box-shadow:0 8px 20px rgba(0,0,0,0.6);border-color:var(--accent);color:var(--text)}
   </style>
 </head>
 <body>
   <div class="wrap">
+    <!-- Tab-Navigation (zentral oben) -->
+    <nav class="tabs" role="tablist" aria-label="Hauptnavigation">
+      <button role="tab" class="tab" id="tab-about" aria-controls="panel-about" aria-selected="true">About</button>
+      <button role="tab" class="tab" id="tab-news" aria-controls="panel-news" aria-selected="false">News</button>
+      <button role="tab" class="tab" id="tab-projects" aria-controls="panel-projects" aria-selected="false">Projects</button>
+    </nav>
+
+    <!-- About-Panel: bestehender Header + Main werden hier angezeigt -->
+    <div id="panel-about" class="tab-panel" role="tabpanel" aria-labelledby="tab-about" aria-hidden="false">
     <header>
       <div class="avatar" aria-hidden="true">
         <img src="assets/me.jpg" alt="Porträt von Thomas B.">
@@ -195,6 +301,187 @@
         </section>
       </div>
     </main>
+    </div>
+
+    <!-- News-Panel: dynamic content loaded from assets/news.json -->
+    <section id="panel-news" class="tab-panel" role="tabpanel" aria-labelledby="tab-news" aria-hidden="true">
+      <div class="stations" style="padding-top:0">
+        <h2 style="margin:0 0 0.5rem 0;font-size:1.05rem">News</h2>
+        <div id="news-empty" class="news-empty">Lädt...</div>
+        <div id="news-list" class="news-list" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Projects-Panel (leer) -->
+    <section id="panel-projects" class="tab-panel" role="tabpanel" aria-labelledby="tab-projects" aria-hidden="true">
+      <div class="stations" style="padding-top:0">
+        <h2 style="margin:0 0 0.5rem 0;font-size:1.05rem">Projects</h2>
+        <p style="margin:0;color:var(--muted);font-size:0.95rem">Keine Einträge.</p>
+      </div>
+    </section>
   </div>
+
+  <!-- Theme toggle button (fixed top-right) -->
+  <button class="theme-toggle" id="theme-toggle" aria-pressed="false" aria-label="Dunkelmodus aktivieren" title="Dunkelmodus">
+    <!-- Sun icon (default) -->
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" fill="currentColor" />
+      <g stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <path d="M12 2v2" />
+        <path d="M12 20v2" />
+        <path d="M4.93 4.93l1.41 1.41" />
+        <path d="M17.66 17.66l1.41 1.41" />
+        <path d="M2 12h2" />
+        <path d="M20 12h2" />
+        <path d="M4.93 19.07l1.41-1.41" />
+        <path d="M17.66 6.34l1.41-1.41" />
+      </g>
+    </svg>
+  </button>
+
+  <!-- Floating contact buttons: GitHub and Email -->
+  <div class="contact-actions" aria-hidden="false">
+    <a href="https://github.com/thomashsmainz" target="_blank" rel="noopener noreferrer" class="github-btn" aria-label="GitHub öffnen" title="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .5C5.7.5.9 5.3.9 11.6c0 4.7 3 8.7 7.1 10.1.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.2-3.5-1.2-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 1.9.7 2.6 1.3.1-1 .4-1.6.7-2-2.3-.3-4.7-1.2-4.7-5.2 0-1.2.4-2.3 1-3.1-.1-.3-.5-1.5.1-3.1 0 0 .8-.2 2.7 1.1.8-.2 1.6-.4 2.4-.4s1.6.1 2.4.4c1.9-1.3 2.7-1.1 2.7-1.1.6 1.6.2 2.8.1 3.1.6.8 1 1.9 1 3.1 0 4-2.4 4.9-4.7 5.2.4.4.8 1.1.8 2.3v3.3c0 .3.2.6.7.5 4.1-1.4 7.1-5.4 7.1-10.1C23.1 5.3 18.3.5 12 .5z"/></svg>
+    </a>
+    <a href="mailto:thomas.burczyk@beispiel.de?subject=Kontakt%20von%20der%20Seite" class="email-btn" aria-label="E-Mail schreiben" title="E-Mail">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 6h16v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z"/><path d="M22 6L12 13 2 6"/></svg>
+    </a>
+  </div>
+
+  <!-- Script to handle theme toggle and persistence -->
+  <script>
+  // ...small self-contained script...
+  (function(){
+    const root = document.documentElement;
+    const btn = document.getElementById('theme-toggle');
+
+    const sunSVG = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><g stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/></g></svg>';
+    const moonSVG = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/></svg>';
+
+    function applyTheme(isDark){
+      if(isDark){
+        root.setAttribute('data-theme','dark');
+        btn.setAttribute('aria-pressed','true');
+        btn.setAttribute('aria-label','Lichtmodus aktivieren');
+        btn.title = 'Lichtmodus';
+        btn.innerHTML = moonSVG;
+      } else {
+        root.removeAttribute('data-theme');
+        btn.setAttribute('aria-pressed','false');
+        btn.setAttribute('aria-label','Dunkelmodus aktivieren');
+        btn.title = 'Dunkelmodus';
+        btn.innerHTML = sunSVG;
+      }
+      try{ localStorage.setItem('theme', isDark ? 'dark' : 'light'); }catch(e){}
+    }
+
+    // Initial state: saved preference > prefers-color-scheme > light default
+    const saved = (function(){try{return localStorage.getItem('theme')}catch(e){return null}})();
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialDark = saved ? saved === 'dark' : prefersDark;
+    applyTheme(initialDark);
+
+    btn.addEventListener('click', function(){
+      const isNowDark = root.getAttribute('data-theme') !== 'dark';
+      applyTheme(isNowDark);
+    });
+
+    // Update on system changes if no explicit preference saved
+    if(window.matchMedia){
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e=>{
+        if(!localStorage.getItem('theme')) applyTheme(e.matches);
+      });
+    }
+  })();
+  </script>
+
+  <!-- Tabs script -->
+  <script>
+  (function(){
+    const tabs = Array.from(document.querySelectorAll('.tab'));
+    const panels = Array.from(document.querySelectorAll('.tab-panel'));
+
+    function select(id){
+      tabs.forEach(t=> t.setAttribute('aria-selected', t.id === 'tab-' + id ? 'true' : 'false'));
+      panels.forEach(p=> p.setAttribute('aria-hidden', p.id === 'panel-' + id ? 'false' : 'true'));
+      try{ localStorage.setItem('selectedTab', id); }catch(e){}
+    }
+
+    tabs.forEach(t=> t.addEventListener('click', ()=> select(t.id.replace('tab-',''))));
+
+    const saved = (function(){try{return localStorage.getItem('selectedTab')}catch(e){return null}})();
+    select(saved || 'about');
+  })();
+  </script>
+
+  <!-- News loader script -->
+  <script>
+  (function(){
+    const newsList = document.getElementById('news-list');
+    const newsEmpty = document.getElementById('news-empty');
+    let loaded = false;
+
+    async function tryFetchCandidates(candidates){
+      for(const p of candidates){
+        try{
+          const res = await fetch(p, {cache: 'no-cache'});
+          if(!res.ok) continue;
+          const data = await res.json();
+          if(Array.isArray(data)) return data;
+        }catch(e){/* try next */}
+      }
+      return null;
+    }
+
+    function renderNews(items){
+      newsList.innerHTML = '';
+      if(!items || items.length === 0){
+        newsEmpty.textContent = 'Keine Einträge.';
+        return;
+      }
+      newsEmpty.textContent = '';
+      items.forEach(it=>{
+        const art = document.createElement('article');
+        art.className = 'news-card';
+
+        const fig = document.createElement('figure');
+        const img = document.createElement('img');
+        img.alt = it.title || 'News Bild';
+        img.src = it.image || 'https://picsum.photos/400/300?random=5';
+        fig.appendChild(img);
+
+        const meta = document.createElement('div');
+        meta.className = 'meta';
+        const h3 = document.createElement('h3'); h3.textContent = it.title || 'Titel';
+        const date = document.createElement('div'); date.className = 'date';
+        try{ date.textContent = new Date(it.date).toLocaleDateString(); }catch(e){ date.textContent = it.date || '' }
+        const p = document.createElement('p'); p.textContent = it.summary || '';
+        meta.appendChild(h3); meta.appendChild(date); meta.appendChild(p);
+
+        art.appendChild(fig); art.appendChild(meta);
+        newsList.appendChild(art);
+      });
+    }
+
+    async function loadNews(){
+      if(loaded) return;
+      newsEmpty.textContent = 'Lädt...';
+      const candidates = ['assets/news.json','./assets/news.json','/assets/news.json'];
+      const data = await tryFetchCandidates(candidates);
+      if(data === null){ newsEmpty.textContent = 'Fehler beim Laden der News.'; return; }
+      renderNews(data);
+      loaded = true;
+    }
+
+    // Load on DOM ready
+    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadNews); else loadNews();
+
+    // Also attempt to load when News tab is clicked
+    const tabNews = document.getElementById('tab-news');
+    if(tabNews) tabNews.addEventListener('click', loadNews);
+  })();
+  </script>
+
 </body>
 </html>
