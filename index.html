@@ -326,11 +326,57 @@
       </div>
     </section>
 
-    <!-- Projects-Panel (leer) -->
+    <!-- Projects-Panel: 2x2 Karten-Galerie (Vorschauen verlinken auf maps/*.html) -->
     <section id="panel-projects" class="tab-panel" role="tabpanel" aria-labelledby="tab-projects" aria-hidden="true">
       <div class="stations" style="padding-top:0">
         <h2 style="margin:0 0 0.5rem 0;font-size:1.05rem">Projects</h2>
-        <p style="margin:0;color:var(--muted);font-size:0.95rem">Keine Einträge.</p>
+        <p style="margin:0;color:var(--muted);font-size:0.95rem">Vier (jetzt fünf) Karten. Erzeuge die HTML-Dateien z.B. mit deinem Notebook und lege sie im Ordner <code>maps/</code> ab. Jede Karte kann direkt geöffnet oder in der Vorschau betrachtet werden.</p>
+
+        <div class="gallery" role="list" aria-label="Projektkarten" style="grid-template-columns:repeat(2,1fr);gap:1.05rem;margin-top:1rem">
+
+          <a class="card" role="listitem" href="maps/map_1_basiskarte.html" target="_blank" rel="noopener noreferrer" aria-label="Basiskarte öffnen">
+            <figure style="height:220px;overflow:hidden;margin:0">
+              <iframe src="maps/map_1_basiskarte.html" title="Basiskarte" style="width:100%;height:100%;border:0;display:block"></iframe>
+            </figure>
+            <div class="meta">
+              <h3>Basiskarte</h3>
+              <p>Zentrum Europa, Zoom 4 — OpenStreetMap</p>
+            </div>
+          </a>
+
+          <a class="card" role="listitem" href="maps/map_2_punkte.html" target="_blank" rel="noopener noreferrer" aria-label="Punktekarte öffnen">
+            <figure style="height:220px;overflow:hidden;margin:0">
+              <iframe src="maps/map_2_punkte.html" title="Punktekarte" style="width:100%;height:100%;border:0;display:block"></iframe>
+            </figure>
+            <div class="meta">
+              <h3>Punkte</h3>
+              <p>Marker mit Popups / Tooltips.</p>
+            </div>
+          </a>
+
+          <a class="card" role="listitem" href="maps/map_3_reiseroute.html" target="_blank" rel="noopener noreferrer" aria-label="Reiseroute öffnen">
+            <figure style="height:220px;overflow:hidden;margin:0">
+              <iframe src="maps/map_3_reiseroute.html" title="Reiseroute" style="width:100%;height:100%;border:0;display:block"></iframe>
+            </figure>
+            <div class="meta">
+              <h3>Reiseroute</h3>
+              <p>Polyline mit nummerierten Stationen.</p>
+            </div>
+          </a>
+
+          <a class="card" role="listitem" href="maps/map_4_flaechen_online.html" target="_blank" rel="noopener noreferrer" aria-label="Flächenkarte öffnen">
+            <figure style="height:220px;overflow:hidden;margin:0">
+              <iframe src="maps/map_4_flaechen_online.html" title="Flächenkarte" style="width:100%;height:100%;border:0;display:block"></iframe>
+            </figure>
+            <div class="meta">
+              <h3>Flächen / GeoJSON</h3>
+              <p>Welt-GeoJSON mit hervorgehobenen Ländern.</p>
+            </div>
+          </a>
+
+          <a class="card" role="listitem" href="maps/map_5_3d_gebaeude.html" target="_blank" rel="noopener noreferrer" aria-label="3D Gebäude öffnen">
+            <figure style="height:220px;overflow:hidden;margin:0">
+        </div>
       </div>
     </section>
   </div>
